@@ -11,8 +11,10 @@
       <h1>Github Member search</h1>
       <h4>Enter a user name to find a github member</h4>
       <form id ="search">
+        <input type ="hidden" id="repouser" value="stewarea">
         <label for="user">Enter a User Name</label>
         <input id="user" type="text">
+
         <button class ="submit" id="submit">Search</button>
       </form>
         <div class="result">
@@ -24,7 +26,10 @@
               <div class ="name">
               </div><br />
               <h2>Repository Info</h2><br>
-              <div class="publicrepos">
+              <div id="showrepo">
+                <ul></ul>
+              </div>
+              <div id="showdesc">
                 <ul></ul>
               </div>
             </div>

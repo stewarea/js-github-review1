@@ -15,12 +15,8 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
   $('#user').val("");
   $.get('https://api.github.com/users/'+ user +'?access_token=' + apiKey).then(function(response) {
     console.log(response);
-    // var userid = response.login;
-    // var name = response.name;
-    // var photo = response.avatar_url;
-    // var bio = response.bio;
+
       displayUser(response.login);
-      console.log(response.login);
       displayName(response.name);
       displayPhoto(response.avatar_url);
       displayBio(response.bio);
@@ -31,38 +27,46 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
    });
  };
 
-//  Search.prototype.getRepos = function (repos, displayRepos) {
-//
-//    $.get('https://api.github.com/users/'+ user +'/repos?access_token=' + apiKey).then(function(repos) {
-//      var reponame = (repos.name);
-//    }).fail(function(error){
-//      console.log(error.responseJSON.message);
-//      getRepos(repos);
-//
-//      this.getRepoNames(name, desc);
-//
-//   });
-//
-//   Search.prototype.getRepos = function (repos) {
-//     reponame = [];
-//     repodsc = [];
-//     for(repo of repos) {
-//       var name = (repo.name);
-//         reponame.push(name);
-//       var desc = (repo.description)
-//         repodesc.push(desc);
-//
-//         this.listRepos(reponame, repodesc);
-//     }
-//   };
-//
-//   Search.prototype.listRepos = function (reponame, respodesc) {
-//
-//     for (desc of descs) {
-//       repodesc.push(desc);
-//     }
-//   };
-//
-// };
+ Search.prototype.getReposSearch = function (displayRepos, displayRepoDesc) {
+   that = this;
+
+   var repouser = $('#repouser').val();
+    $('#repouser').val("");
+   $.get('https://api.github.com/users/'+ repouser +'/repos?access_token=' + apiKey).then(function(repos) {
+     console.log(repos);
+      that.getRepos(repos);
+
+     displayRepos(repos.name);
+     displayRepoDesc(repos.description);
+
+   });
+};
+  Search.prototype.getRepos = function (repos) {
+    var reponamearray = [];
+    var repodescarray = [];
+    for (repo of repos) {
+      var a = (repo.name);
+      var b = (repo.description);
+      reponame.push(a);
+      repodesc.push(b);
+    console.log(reponamearray);
+    console.log(repodescarray);
+
+
+        this.listRepos(reponamearray, repodesc);
+    }
+  };
+
+Search.prototype.listRepos = function (reponamearray, respodescarray) {
+    var reponame = "";
+    var repodesc = "";
+    for (var i = 0; i < reponamearray.length; i++) {
+      reponame += i;
+    }
+    for (var j = 0; j < repodescarray.length; i++) {
+      reponame += j;
+    }
+  };
+
 
 exports.searchModule = Search;

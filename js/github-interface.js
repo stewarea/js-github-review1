@@ -1,4 +1,3 @@
-
 var Search = require('./../js/github.js').searchModule;
 
 var displayUser = function(user) {
@@ -14,13 +13,15 @@ var displayBio = function(bio) {
   $('.bio').text(bio);
 };
 
-// var displayRepos = function(repos) {
-//   $('#showrepos').append("<p>" + reponame + "</p>");
-// };
-//
-// var displayRepoDesc = function (desc) {
-//   $('#showdesc').append("<p>" + repodesc + "</p>")
-// }
+var displayRepos = function(reponame) {
+
+  $('#showrepos').append("<p>" + reponame + "</p>");
+};
+
+var displayRepoDesc = function (repodesc) {
+
+  $('#showdesc').append("<p>" + repodesc + "</p>");
+};
 
 $(document).ready(function() {
   $('#search').submit(function(event) {
@@ -33,6 +34,6 @@ $(document).ready(function() {
       newSearch = new Search(user);
 
       newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
-      // newSearch.getRepos(displayRepoName, displayRepoDesc);
+      newSearch.getReposSearch(displayRepos, displayRepoDesc);
     });
   });
