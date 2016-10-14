@@ -2,23 +2,29 @@
 exports.apiKey = "fb3f8ccd22f1442716a0fddae7abcd97e7661a39";
 
 },{}],2:[function(require,module,exports){
-function Search (name, description) {
-  this.userid = userid;
-  this.name = name;
-  this.bio = bio;
-  this. description = description;
+var apiKey = require('./../.env').apiKey;
+
+function Search (userid, name, bio, photo, reponame, description) {
+  this.userid = "";
+  this.name = "";
+  this.bio = "";
+  this.photo = "";
+  this.reponame = "";
+  this. description = "";
 
 }
 
 Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, displayBio) {
+  var user = $('#user').val();
+  $('#user').val("");
   $.get('https://api.github.com/users/'+ user +'?access_token=' + apiKey).then(function(response) {
-
+    console.log(response);
     // var userid = response.login;
     // var name = response.name;
     // var photo = response.avatar_url;
     // var bio = response.bio;
 
-    console.log(response);
+
    }).fail(function(error){
      console.log(error.responseJSON.message);
      displayUser(response.login);
@@ -29,35 +35,44 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
    });
  };
 
- Search.prototype.getRepos = function (repos, displayRepos) {
-   reponame = [];
-   repodesc = [];
-   $.get('https://api.github.com/users/'+ user +'/repos?access_token=' + apiKey).then(function(repos) {
-     var reponame = (repos.name);
-     console.log(reponame);
-
-     console.log(repos);
-   }).fail(function(error){
-     console.log(error.responseJSON.message);
-     displayRepoName(repos.name);
-     displayRepoDesc(repos.description);
-
-     this.getRepoNames(name, desc);
-
-  });
-
-  Search.prototype.getRepoNames = function (name, desc) {
-    name = [];
-    desc = [];
-
-  };
-
-};
+//  Search.prototype.getRepos = function (repos, displayRepos) {
+//
+//    $.get('https://api.github.com/users/'+ user +'/repos?access_token=' + apiKey).then(function(repos) {
+//      var reponame = (repos.name);
+//    }).fail(function(error){
+//      console.log(error.responseJSON.message);
+//      getRepos(repos);
+//
+//      this.getRepoNames(name, desc);
+//
+//   });
+//
+//   Search.prototype.getRepos = function (repos) {
+//     reponame = [];
+//     repodsc = [];
+//     for(repo of repos) {
+//       var name = (repo.name);
+//         reponame.push(name);
+//       var desc = (repo.description)
+//         repodesc.push(desc);
+//
+//         this.listRepos(reponame, repodesc);
+//     }
+//   };
+//
+//   Search.prototype.listRepos = function (reponame, respodesc) {
+//
+//     for (desc of descs) {
+//       repodesc.push(desc);
+//     }
+//   };
+//
+// };
 
 exports.searchModule = Search;
 
-},{}],3:[function(require,module,exports){
-var apiKey = require('./../.env').apiKey;
+},{"./../.env":1}],3:[function(require,module,exports){
+
 var Search = require('./../js/github.js').searchModule;
 
 var displayUser = function(user) {
@@ -73,25 +88,27 @@ var displayBio = function(bio) {
   $('.bio').text(bio);
 };
 
-var displayRepos = function(repos) {
-  $('.publicrepos').text("<li>" + reponame + "</li>");
-};
+// var displayRepos = function(repos) {
+//   $('#showrepos').append("<p>" + reponame + "</p>");
+// };
+//
+// var displayRepoDesc = function (desc) {
+//   $('#showdesc').append("<p>" + repodesc + "</p>")
+// }
 
 $(document).ready(function() {
   $('#search').submit(function(event) {
     event.preventDefault();
-      var user = $('#user').val();
-      $('#user').val("");
+
       $(".result").show();
+      var description = "stuff";
+      var reponame = "name";
 
-      newSearch = new Search(name, description);
+      newSearch = new Search(user);
 
-      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio, displayRepos);
-      newSearch.getRepos(displayRepoName, displayRepoDesc);
-});
-
-
-
+      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
+      // newSearch.getRepos(displayRepoName, displayRepoDesc);
+    });
   });
 
-},{"./../.env":1,"./../js/github.js":2}]},{},[3]);
+},{"./../js/github.js":2}]},{},[3]);

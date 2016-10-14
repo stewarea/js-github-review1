@@ -1,4 +1,4 @@
-var apiKey = require('./../.env').apiKey;
+
 var Search = require('./../js/github.js').searchModule;
 
 var displayUser = function(user) {
@@ -14,25 +14,25 @@ var displayBio = function(bio) {
   $('.bio').text(bio);
 };
 
-var displayRepos = function(repos) {
-  $('.publicrepos').text("<li>" + reponame + "</li>");
-};
+// var displayRepos = function(repos) {
+//   $('#showrepos').append("<p>" + reponame + "</p>");
+// };
+//
+// var displayRepoDesc = function (desc) {
+//   $('#showdesc').append("<p>" + repodesc + "</p>")
+// }
 
 $(document).ready(function() {
   $('#search').submit(function(event) {
     event.preventDefault();
 
-});
-      var user = $('#user').val();
-      $('#user').val("");
       $(".result").show();
+      var description = "stuff";
+      var reponame = "name";
 
-      newSearch = new Search(userid, name, bio, photo, reponame, description);
+      newSearch = new Search(user);
 
-      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio, displayRepos);
-      newSearch.getRepos(displayRepoName, displayRepoDesc);
-});
-
-
-
+      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
+      // newSearch.getRepos(displayRepoName, displayRepoDesc);
+    });
   });
