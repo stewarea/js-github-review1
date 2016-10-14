@@ -14,13 +14,21 @@ $(document).ready(function() {
       var repositories = response.public_repos;
       var bio = response.bio;
       $('.userid').text("User ID: " + user);
-      $('.name').text"Name: " +   name + "</h3>");
+      $('.name').text("Name: " + name);
       $('.photo').html("<img src="+ photo +">");
       $('.bio').text(bio);
       $('.repos').text("Public Repos: " + repositories);
-      console.log(repositories);
+      console.log(response);
      }).fail(function(error){
        console.log(error.responseJSON.message);
+
      });
+     $.get('https://api.github.com/users/'+ user +'/repos?access_token=' + apiKey).then(function(repos) {
+       var reponame = (repos.name);
+       console.log(reponame);
+       $('.publicrepos').text("<li>" + reponame + "</li>");
+       console.log(repos);
+     }).fail(function(error){
+       console.log(error.responseJSON.message);
   });
 });
