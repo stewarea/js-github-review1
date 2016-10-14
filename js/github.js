@@ -1,12 +1,12 @@
 var apiKey = require('./../.env').apiKey;
 
-function Search (userid, name, bio, photo, reponame, description) {
+function Search (userid, name, bio, photo, rname, rdesc) {
   this.userid = "";
   this.name = "";
   this.bio = "";
   this.photo = "";
-  this.reponame = "";
-  this. description = "";
+  this.rname = "";
+  this.rdesc = "";
 
 }
 
@@ -14,7 +14,6 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
   var user = $('#user').val();
   $('#user').val("");
   $.get('https://api.github.com/users/'+ user +'?access_token=' + apiKey).then(function(response) {
-    console.log(response);
 
       displayUser(response.login);
       displayName(response.name);
@@ -33,7 +32,7 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
    var repouser = $('#repouser').val();
     $('#repouser').val("");
    $.get('https://api.github.com/users/'+ repouser +'/repos?access_token=' + apiKey).then(function(repos) {
-     console.log(repos);
+
       that.getRepos(repos);
 
      displayRepos(repos.name);
@@ -42,29 +41,31 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
    });
 };
   Search.prototype.getRepos = function (repos) {
-    var reponamearray = [];
-    var repodescarray = [];
+    var namearray = [];
+    var descarray = [];
+
     for (repo of repos) {
+
+      var b = repo.description;
+      descarray.push(b);
+
       var a = (repo.name);
-      var b = (repo.description);
-      reponame.push(a);
-      repodesc.push(b);
-    console.log(reponamearray);
-    console.log(repodescarray);
+      namearray.push(a);
 
-
-        this.listRepos(reponamearray, repodesc);
     }
+    this.listRepos(namearray, descarray);
+    console.log(namearray);
+    console.log(descarray);
   };
 
-Search.prototype.listRepos = function (reponamearray, respodescarray) {
+Search.prototype.listRepos = function (namearray, descarray) {
     var reponame = "";
     var repodesc = "";
-    for (var i = 0; i < reponamearray.length; i++) {
+    for (var i = 0; i < namearray.length; ++i) {
       reponame += i;
     }
-    for (var j = 0; j < repodescarray.length; i++) {
-      reponame += j;
+    for (var j = 0; j < descarray.length; i++) {
+      repodesc += j;
     }
   };
 
