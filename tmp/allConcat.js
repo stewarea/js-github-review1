@@ -16,10 +16,10 @@ var displayBio = function(bio) {
 var displayRepos = function(reponame) {
 
   $('#showrepos').append("<p>" + reponame + "</p>");
+
 };
 
 var displayRepoDesc = function (repodesc) {
-
   $('#showdesc').append("<p>" + repodesc + "</p>");
 };
 

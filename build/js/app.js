@@ -57,20 +57,28 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
       namearray.push(a);
 
     }
+
     this.listRepos(namearray, descarray);
-    console.log(namearray);
-    console.log(descarray);
+
   };
 
 Search.prototype.listRepos = function (namearray, descarray) {
-    var reponame = "";
-    var repodesc = "";
-    for (var i = 0; i < namearray.length; ++i) {
-      reponame += i;
+    var reponame = " ";
+    var repodesc = " ";
+    for (var i = 0; i < namearray.length; i++) {
+      if (namearray[i] != namearray) {
+        reponame += "<li>" + namearray[i] + "</li>";
+          // displayRepos(reponame);
+      }
     }
-    for (var j = 0; j < descarray.length; i++) {
-      repodesc += j;
+    for (var j = 0; j < descarray.length; j++) {
+      if (descarray[j] != descarray) {
+        repodesc += "<li>" + repodesc[j] + "</li>";
+          // displayRepoDesc(repodesc);
+      }
     }
+    console.log(reponame);
+    console.log(repodesc);
   };
 
 
@@ -95,10 +103,10 @@ var displayBio = function(bio) {
 var displayRepos = function(reponame) {
 
   $('#showrepos').append("<p>" + reponame + "</p>");
+
 };
 
 var displayRepoDesc = function (repodesc) {
-
   $('#showdesc').append("<p>" + repodesc + "</p>");
 };
 
