@@ -36,4 +36,7 @@ $(document).ready(function() {
       newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
       newSearch.getReposSearch(displayRepos, displayRepoDesc);
     });
+  $('#clear').click(function() {
+    location.reload();
+    });
   });

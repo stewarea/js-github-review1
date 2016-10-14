@@ -8,33 +8,36 @@
   </head>
   <body>
     <div class ="container">
-      <h1>Github Member search</h1>
-      <h4>Enter a user name to find a github member</h4>
-      <form id ="search">
-        <input type ="hidden" id="repouser" value="stewarea">
-        <label for="user">Enter a User Name</label>
-        <input id="user" type="text">
+      <div class ="well">
+        <h1>Github Member search</h1>
+        <h4>Enter a user name to find a github member</h4>
+        <form id ="search">
+          <input type ="hidden" id="repouser" value="stewarea">
+          <label for="user">Enter a User Name</label>
+          <input id="user" type="text">
 
-        <button class ="submit" id="submit">Search</button>
-      </form>
-        <div class="result">
-          <div class ="row">
-            <div class ="col-sm-3">
-              <h2>User</h2>
-              <div class ="userid">
+          <button class ="submit" id="submit">Search</button>
+          <button class="btn-danger" id="clear">Clear</button>
+        </form>
+          <div class="result">
+            <div class ="row">
+              <div class ="col-sm-3">
+                <h2>User</h2>
+                <div class ="userid">
+                </div>
+                <div class ="name">
+                </div><br />
+                <h2>Repository Info</h2><br>
+                <div id="showrepo">
+                  <ul></ul>
+                </div>
+                <div id="showdesc">
+                  <ul></ul>
+                </div>
               </div>
-              <div class ="name">
-              </div><br />
-              <h2>Repository Info</h2><br>
-              <div id="showrepo">
-                <ul></ul>
-              </div>
-              <div id="showdesc">
-                <ul></ul>
-              </div>
-            </div>
-            <div class ="col-sm-3">
-              <div class ="photo">
+              <div class ="col-sm-3">
+                <div class ="photo">
+                </div>
               </div>
             </div>
           </div>

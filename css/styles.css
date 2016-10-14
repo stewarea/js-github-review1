@@ -5,12 +5,20 @@
 .container {
   margin: 0 auto;
   width: 1000px;
-
-
 }
 
 body {
   background: url('/img/github.jpg') center center no-repeat;
   background-size: cover;
   background-attachment: fixed;
+}
+
+.well{
+    background: transparent;
+    border: none;
+    color: white;
+    text-align: center;
+    width: 100%;
+    background: rgba(300, 300, 300, 0.8);
+     text-shadow: 0px 0px 15px black !important
 }
