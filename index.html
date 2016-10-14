@@ -1,6 +1,7 @@
 <html>
   <head>
     <link rel="stylesheet" href="build/css/vendor.css">
+    <link rel="stylesheet" href="css/styles.css">
     <script src="build/js/vendor.min.js"></script>
     <script type="text/javascript" src="build/js/app.js"></script>
     <title></title>
@@ -14,18 +15,24 @@
         <input id="user" type="text">
         <button class ="submit" id="submit">Search</button>
       </form>
-      <div class="result">
-        <h2>Results</h2>
-        <div class ="userid">
+        <div class="result">
+          <div class ="row">
+            <div class ="col-sm-3">
+              <h2>User</h2>
+              <div class ="userid">
+              </div>
+              <div class ="name">
+              </div><br />
+              <h2>Repository Info</h2><br>
+              <div class ="repos">
+              </div>
+            </div>
+            <div class ="col-sm-3">
+              <div class ="photo">
+              </div>
+            </div>
+          </div>
         </div>
-        <div class ="name">
-        </div>
-        <div class ="photo">
-        </div>
-        <div class ="repos">
-        </div>
-      </div>
-
     </div>
   </body>
 </html>
