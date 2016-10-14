@@ -1,12 +1,13 @@
 var apiKey = require('./../.env').apiKey;
+// exports.apiKey = "fb3f8ccd22f1442716a0fddae7abcd97e7661a39";
 
 function Search (userid, name, bio, photo, rname, rdesc) {
-  this.userid = "";
-  this.name = "";
-  this.bio = "";
-  this.photo = "";
-  this.rname = "";
-  this.rdesc = "";
+  this.userid = userid;
+  this.name = name;
+  this.bio = bio;
+  this.photo = photo;
+  this.rname = rname;
+  this.rdesc = rdesc;
 
 }
 
@@ -28,19 +29,20 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
 
  Search.prototype.getReposSearch = function (displayRepos, displayRepoDesc) {
    that = this;
-
+  //  var rn = [];
+  //  var rd = [];
    var repouser = $('#repouser').val();
     $('#repouser').val("");
    $.get('https://api.github.com/users/'+ repouser +'/repos?access_token=' + apiKey).then(function(repos) {
 
       that.getRepos(repos);
-
+      // rn.push(repos.name);
+      // rd.push(pepos.description);
     //  displayRepos(repos.name);
     //  displayRepoDesc(repos.description);
-
    });
 };
-  Search.prototype.getRepos = function (repos, displayRepos, displayRepoDesc) {
+  Search.prototype.getRepos = function (repos) {
     var namearray = [];
     var descarray = [];
 
@@ -58,19 +60,19 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
 
   };
 
-Search.prototype.listRepos = function (namearray, descarray, displayRepos, displayRepoDesc) {
+Search.prototype.listRepos = function (namearray, descarray) {
     var reponame = " ";
     var repodesc = " ";
     for (var i = 0; i < namearray.length; i++) {
       if (namearray[i] != namearray) {
         reponame += "<li>" + namearray[i] + "</li>";
-          displayRepos(reponame);
+          // displayRepos(reponame);
       }
     }
     for (var j = 0; j < descarray.length; j++) {
       if (descarray[j] != descarray) {
         repodesc += "<li>" + repodesc[j] + "</li>";
-        displayRepoDesc(repodesc);
+        // displayRepoDesc(repodesc);
       }
     }
     console.log(reponame);
