@@ -35,12 +35,12 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
 
       that.getRepos(repos);
 
-     displayRepos(repos.name);
-     displayRepoDesc(repos.description);
+    //  displayRepos(repos.name);
+    //  displayRepoDesc(repos.description);
 
    });
 };
-  Search.prototype.getRepos = function (repos) {
+  Search.prototype.getRepos = function (repos, displayRepos, displayRepoDesc) {
     var namearray = [];
     var descarray = [];
 
@@ -58,19 +58,19 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
 
   };
 
-Search.prototype.listRepos = function (namearray, descarray) {
+Search.prototype.listRepos = function (namearray, descarray, displayRepos, displayRepoDesc) {
     var reponame = " ";
     var repodesc = " ";
     for (var i = 0; i < namearray.length; i++) {
       if (namearray[i] != namearray) {
         reponame += "<li>" + namearray[i] + "</li>";
-          // displayRepos(reponame);
+          displayRepos(reponame);
       }
     }
     for (var j = 0; j < descarray.length; j++) {
       if (descarray[j] != descarray) {
         repodesc += "<li>" + repodesc[j] + "</li>";
-          // displayRepoDesc(repodesc);
+        displayRepoDesc(repodesc);
       }
     }
     console.log(reponame);
