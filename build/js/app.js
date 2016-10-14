@@ -23,14 +23,14 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
     // var name = response.name;
     // var photo = response.avatar_url;
     // var bio = response.bio;
-
-
-   }).fail(function(error){
+      displayUser(response.login);
+      console.log(response.login);
+      displayName(response.name);
+      displayPhoto(response.avatar_url);
+      displayBio(response.bio);
+}).fail(function(error){
      console.log(error.responseJSON.message);
-     displayUser(response.login);
-     displayName(response.name);
-     displayPhoto(response.avatar_url);
-     displayBio(response.bio);
+
 
    });
  };
