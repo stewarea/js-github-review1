@@ -13,15 +13,17 @@ var displayBio = function(bio) {
   $('.bio').text(bio);
 };
 
-var displayRepos = function(reponame) {
-
-  $('#showrepos').append("<p>" + reponame + "</p>");
-
+var displayRepos = function(repos) {
+  for (repo of repos) {
+    $("#showrepos tbody").append("<tr><td>" + repo.name + "</td><td>" + repo.description + "</td></tr>");
+    //$("#showdesc").append("<p>" + repo.description + "</p>");
+  }
+  // $('#showrepos').append("<p>" + reponame + "</p>");
 };
 
-var displayRepoDesc = function (repodesc) {
-  $('#showdesc').append("<p>" + repodesc + "</p>");
-};
+// var displayRepoDesc = function (repodesc) {
+//   $('#showdesc').append("<p>" + repodesc + "</p>");
+// };
 
 $(document).ready(function() {
   $('#search').submit(function(event) {
@@ -34,7 +36,7 @@ $(document).ready(function() {
       newSearch = new Search(user);
 
       newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
-      newSearch.getReposSearch(displayRepos, displayRepoDesc);
+      newSearch.getReposSearch(displayRepos);
     });
   $('#clear').click(function() {
     location.reload();

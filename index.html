@@ -12,7 +12,7 @@
         <h1>Github Member search</h1>
         <h4>Enter a user name to find a github member</h4>
         <form id ="search">
-          <input type ="hidden" id="repouser" value="stewarea">
+          <!-- <input type ="hidden" id="repouser" value="user"> -->
           <label for="user">Enter a User Name</label>
           <input id="user" type="text">
 
@@ -21,21 +21,18 @@
         </form>
           <div class="result">
             <div class ="row">
-              <div class ="col-sm-3">
+              <div class ="col-sm-6">
                 <h2>User</h2>
                 <div class ="userid">
                 </div>
                 <div class ="name">
                 </div><br />
                 <h2>Repository Info</h2><br>
-                <div id="showrepo">
-                  <ul></ul>
+                  <table class ="table-striped table" id ="showrepos">
+                    <tbody></tbody>
+                  </table>
                 </div>
-                <div id="showdesc">
-                  <ul></ul>
-                </div>
-              </div>
-              <div class ="col-sm-3">
+              <div class ="col-sm-6">
                 <div class ="photo">
                 </div>
               </div>

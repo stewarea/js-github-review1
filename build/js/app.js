@@ -17,7 +17,7 @@ function Search (userid, name, bio, photo, rname, rdesc) {
 
 Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, displayBio) {
   var user = $('#user').val();
-  $('#user').val("");
+
   $.get('https://api.github.com/users/'+ user +'?access_token=' + apiKey).then(function(response) {
 
       displayUser(response.login);
@@ -31,57 +31,59 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
    });
  };
 
- Search.prototype.getReposSearch = function (displayRepos, displayRepoDesc) {
+ Search.prototype.getReposSearch = function (displayRepos) {
    that = this;
   //  var rn = [];
   //  var rd = [];
-   var repouser = $('#repouser').val();
-    $('#repouser').val("");
-   $.get('https://api.github.com/users/'+ repouser +'/repos?access_token=' + apiKey).then(function(repos) {
+   var user = $('#user').val();
+   console.log(displayRepos);
 
-      that.getRepos(repos);
+   $.get('https://api.github.com/users/'+ user +'/repos?per_page=100&access_token=' + apiKey).then(function(repos) {
+   console.log(displayRepos);
+      displayRepos(repos);
+
       // rn.push(repos.name);
       // rd.push(pepos.description);
-    //  displayRepos(repos.name);
-    //  displayRepoDesc(repos.description);
+     //displayRepos(repos.name);
+     //displayRepoDesc(repos.description);
    });
 };
-  Search.prototype.getRepos = function (repos) {
-    var namearray = [];
-    var descarray = [];
-
-    for (repo of repos) {
-
-      var b = repo.description;
-      descarray.push(b);
-
-      var a = (repo.name);
-      namearray.push(a);
-
-    }
-
-    this.listRepos(namearray, descarray);
-
-  };
-
-Search.prototype.listRepos = function (namearray, descarray) {
-    var reponame = " ";
-    var repodesc = " ";
-    for (var i = 0; i < namearray.length; i++) {
-      if (namearray[i] != namearray) {
-        reponame += "<li>" + namearray[i] + "</li>";
-          // displayRepos(reponame);
-      }
-    }
-    for (var j = 0; j < descarray.length; j++) {
-      if (descarray[j] != descarray) {
-        repodesc += "<li>" + repodesc[j] + "</li>";
-        // displayRepoDesc(repodesc);
-      }
-    }
-    console.log(reponame);
-    console.log(repodesc);
-  };
+  // Search.prototype.getRepos = function (repos) {
+  //   var namearray = [];
+  //   var descarray = [];
+  //
+  //   for (repo of repos) {
+  //
+  //     var b = repo.description;
+  //     descarray.push(b);
+  //
+  //     var a = (repo.name);
+  //     namearray.push(a);
+  //
+  //   }
+  //
+  //   this.listRepos(namearray, descarray);
+  //
+  // };
+//
+// Search.prototype.listRepos = function (namearray, descarray) {
+//     var reponame = " ";
+//     var repodesc = " ";
+//     for (var i = 0; i < namearray.length; i++) {
+//       if (namearray[i] != namearray) {
+//         reponame += "<li>" + namearray[i] + "</li>";
+//           displayRepos(reponame);
+//       }
+//     }
+//     for (var j = 0; j < descarray.length; j++) {
+//       if (descarray[j] != descarray) {
+//         repodesc += "<li>" + repodesc[j] + "</li>";
+//         displayRepoDesc(repodesc);
+//       }
+//     }
+//     console.log(reponame);
+//     console.log(repodesc);
+//   };
 
 
 exports.searchModule = Search;
@@ -102,15 +104,17 @@ var displayBio = function(bio) {
   $('.bio').text(bio);
 };
 
-var displayRepos = function(reponame) {
-
-  $('#showrepos').append("<p>" + reponame + "</p>");
-
+var displayRepos = function(repos) {
+  for (repo of repos) {
+    $("#showrepos tbody").append("<tr><td>" + repo.name + "</td><td>" + repo.description + "</td></tr>");
+    //$("#showdesc").append("<p>" + repo.description + "</p>");
+  }
+  // $('#showrepos').append("<p>" + reponame + "</p>");
 };
 
-var displayRepoDesc = function (repodesc) {
-  $('#showdesc').append("<p>" + repodesc + "</p>");
-};
+// var displayRepoDesc = function (repodesc) {
+//   $('#showdesc').append("<p>" + repodesc + "</p>");
+// };
 
 $(document).ready(function() {
   $('#search').submit(function(event) {
@@ -123,7 +127,7 @@ $(document).ready(function() {
       newSearch = new Search(user);
 
       newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
-      newSearch.getReposSearch(displayRepos, displayRepoDesc);
+      newSearch.getReposSearch(displayRepos);
     });
   $('#clear').click(function() {
     location.reload();
