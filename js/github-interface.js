@@ -16,14 +16,8 @@ var displayBio = function(bio) {
 var displayRepos = function(repos) {
   for (repo of repos) {
     $("#showrepos tbody").append("<tr><td>" + repo.name + "</td><td>" + repo.description + "</td></tr>");
-    //$("#showdesc").append("<p>" + repo.description + "</p>");
   }
-  // $('#showrepos').append("<p>" + reponame + "</p>");
 };
-
-// var displayRepoDesc = function (repodesc) {
-//   $('#showdesc').append("<p>" + repodesc + "</p>");
-// };
 
 $(document).ready(function() {
   $('#search').submit(function(event) {
