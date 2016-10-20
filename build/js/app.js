@@ -4,18 +4,11 @@ exports.apiKey = "fb3f8ccd22f1442716a0fddae7abcd97e7661a39";
 },{}],2:[function(require,module,exports){
 var apiKey = require('./../.env').apiKey;
 
-function Search (userid, name, bio, photo, rname, rdesc) {
-  this.userid = userid;
-  this.name = name;
-  this.bio = bio;
-  this.photo = photo;
-  this.rname = rname;
-  this.rdesc = rdesc;
-
+function Search () {
 }
 
-Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, displayBio) {
-  var user = $('#user').val();
+Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, displayBio, user) {
+
 
   $.get('https://api.github.com/users/'+ user +'?access_token=' + apiKey).then(function(response) {
 
@@ -65,6 +58,8 @@ var displayRepos = function(repos) {
   }
 };
 
+
+
 $(document).ready(function() {
   $('#search').submit(function(event) {
     event.preventDefault();
@@ -72,10 +67,11 @@ $(document).ready(function() {
       $(".result").show();
       var description = "stuff";
       var reponame = "name";
+      var user = $('#user').val();
 
       newSearch = new Search(user);
 
-      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
+      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio, user);
       newSearch.getReposSearch(displayRepos);
     });
   $('#clear').click(function() {

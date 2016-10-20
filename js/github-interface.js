@@ -19,6 +19,8 @@ var displayRepos = function(repos) {
   }
 };
 
+
+
 $(document).ready(function() {
   $('#search').submit(function(event) {
     event.preventDefault();
@@ -26,10 +28,11 @@ $(document).ready(function() {
       $(".result").show();
       var description = "stuff";
       var reponame = "name";
+      var user = $('#user').val();
 
       newSearch = new Search(user);
 
-      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio);
+      newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio, user);
       newSearch.getReposSearch(displayRepos);
     });
   $('#clear').click(function() {
