@@ -12,20 +12,11 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
     displayName(response.name);
     displayPhoto(response.avatar_url);
     displayBio(response.bio);
-  }).fail(function(error){
-     console.log(error.responseJSON.message);
-
-
-   });
+  });
  };
 
- Search.prototype.getReposSearch = function (displayRepos) {
-   that = this;
-   var user = $('#user').val();
-   console.log(displayRepos);
-
+ Search.prototype.getReposSearch = function (displayRepos, user) {
    $.get('https://api.github.com/users/'+ user +'/repos?per_page=100&access_token=' + apiKey).then(function(repos) {
-   console.log(displayRepos);
       displayRepos(repos);
    });
 };

@@ -16,20 +16,11 @@ Search.prototype.getUsers = function(displayUser, displayName, displayPhoto, dis
     displayName(response.name);
     displayPhoto(response.avatar_url);
     displayBio(response.bio);
-  }).fail(function(error){
-     console.log(error.responseJSON.message);
-
-
-   });
+  });
  };
 
- Search.prototype.getReposSearch = function (displayRepos) {
-   that = this;
-   var user = $('#user').val();
-   console.log(displayRepos);
-
+ Search.prototype.getReposSearch = function (displayRepos, user) {
    $.get('https://api.github.com/users/'+ user +'/repos?per_page=100&access_token=' + apiKey).then(function(repos) {
-   console.log(displayRepos);
       displayRepos(repos);
    });
 };
@@ -53,9 +44,11 @@ var displayBio = function(bio) {
 };
 
 var displayRepos = function(repos) {
-  for (repo of repos) {
-    $("#showrepos tbody").append("<tr><td>" + repo.name + "</td><td>" + repo.description + "</td></tr>");
+
+    for (repo of repos) {
+      $("#showrepos tbody").append("<tr><td>" + repo.name + "</td><td>" + repo.description + "</td></tr>");
   }
+
 };
 
 
@@ -65,14 +58,12 @@ $(document).ready(function() {
     event.preventDefault();
 
       $(".result").show();
-      var description = "stuff";
-      var reponame = "name";
       var user = $('#user').val();
-
       newSearch = new Search(user);
 
       newSearch.getUsers(displayUser, displayName, displayPhoto, displayBio, user);
-      newSearch.getReposSearch(displayRepos);
+      newSearch.getReposSearch(displayRepos, user);
+
     });
   $('#clear').click(function() {
     location.reload();
