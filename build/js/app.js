@@ -44,7 +44,7 @@ var displayBio = function(bio) {
 };
 
 var displayRepos = function(repos) {
-
+    $("#showrepos tbody").empty();
     for (repo of repos) {
       $("#showrepos tbody").append("<tr><td>" + repo.name + "</td><td>" + repo.description + "</td></tr>");
   }
